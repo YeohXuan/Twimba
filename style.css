@@ -1,0 +1,100 @@
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+header, main {
+    width: 290px;
+    margin: 0 auto;
+}
+
+h1 {
+    color: #0F8CDF;
+    font-size: 25px;
+}
+
+.profile-pic {
+    width: 48px;
+    border: 1px solid grey;
+    border-radius: 50%;
+}
+
+.tweet-input-area {
+    display: flex;
+    align-items: flex-start;
+    margin: 25px 0 12px 0;
+    gap: 8px;
+}
+
+textarea {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    border: none;
+    width: 100%;
+    height: 60px;
+    resize: none;
+    font-size: 20px;
+    padding: 10px;
+}
+
+.tweet-btn {
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    border: none;
+    border-radius: 20px;
+    background-color: #1DA1F2;
+    width: 100%;
+    padding: 10px 0;
+    cursor: pointer;
+}
+
+.tweet {
+    margin-top: 10px;
+    border-top: 1px solid lightgrey;
+    padding-top: 20px;
+    margin-top: 20px;
+}
+
+.tweet-inner {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.handle {
+    font-weight: 600;
+    color: #555;
+    margin-top: 5px;
+}
+
+.tweet-details {
+    display: flex;
+    justify-content: space-between;
+    width: 200px;
+    -webkit-user-select: none;
+}
+
+i {
+    cursor: pointer;
+}
+
+.fa-solid {
+    color: #999;
+}
+
+.liked {
+    color: red;
+}
+
+.retweeted {
+    color: limegreen;
+}
+
+.tweet-reply {
+    border-top: 1px solid lightgrey;
+    padding-top: 20px;
+    margin: 10px 0 10px 45px;
+}
+
+.hidden {
+    display: none;
+}
