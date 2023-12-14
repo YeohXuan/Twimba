@@ -161,7 +161,7 @@ function getFeedHtml() {
                     <div class="tweet-reply">
                         <div class="tweet-inner">
                             <img src="${reply.profilePic}" class="profile-pic">
-                                <div>
+                                <div class="reply-container">
                                     <p class="handle">${reply.handle} ${deleteReplyIcon}</p>
                                     <p class="tweet-text">${reply.tweetText}</p>
                                 </div>

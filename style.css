@@ -129,3 +129,7 @@ i {
 #reply-input {
     background-color: transparent;
 }
+
+.reply-container {
+    width: 155px;
+}
