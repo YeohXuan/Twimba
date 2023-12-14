@@ -35,7 +35,7 @@ textarea {
     padding: 10px;
 }
 
-.tweet-btn {
+.post-btn {
     color: white;
     font-size: 20px;
     font-weight: bold;
@@ -98,4 +98,22 @@ i {
 
 .hidden {
     display: none;
+}
+
+.reply-to-modal {
+    display: none;
+    position: fixed;
+    margin: 0 auto;
+    top: 18%;
+    left: 0;
+    right: 0;
+    background-color: #c6e8ff;
+    width: 290px;
+    flex-direction: column;
+    border-radius: 20px;
+    padding: 0 20px 20px 20px;
+}
+
+#reply-input {
+    background-color: transparent;
 }

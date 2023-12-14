@@ -1,26 +1,30 @@
 import { tweetsData } from "./data.js"
 import { v4 as uuidv4 } from 'https://jspm.dev/uuid'
 
+let replyId = ''
+
 document.addEventListener('click', (e) => {
-    if (e.target.dataset.reply) {
-        handleReplyClick(e.target.dataset.reply)
+    if (e.target.dataset.replies) {
+        handleRepliesClick(e.target.dataset.replies)
     } else if (e.target.dataset.like) {
         handleLikeClick(e.target.dataset.like)
     } else if (e.target.dataset.retweet) {
         handleRetweetClick(e.target.dataset.retweet)
+    } else if (e.target.dataset.reply) {
+        handleReplyClick(e.target.dataset.reply)
+    } else if (e.target.id === 'reply-btn') {
+        handleReplyBtnClick()
     } else if (e.target.id === 'tweet-btn') {
         handleTweetBtn()
     }
 })
 
-function handleReplyClick(replyId) {
+function handleRepliesClick(replyId) {
     document.getElementById(`replies-${replyId}`).classList.toggle('hidden')
 }
 
 function handleLikeClick(tweetId) {
-    const targetTweetObj = tweetsData.filter((tweet) => {
-        return tweet.uuid === tweetId
-    })[0]
+    const targetTweetObj = tweetsData.filter((tweet) => {return tweet.uuid === tweetId})[0]
 
     if (targetTweetObj.isLiked) {
         targetTweetObj.likes--
@@ -34,9 +38,7 @@ function handleLikeClick(tweetId) {
 }
 
 function handleRetweetClick(tweetId) {
-    const targetTweetObj = tweetsData.filter((tweet) => {
-        return tweet.uuid === tweetId
-    })[0]
+    const targetTweetObj = tweetsData.filter((tweet) => {return tweet.uuid === tweetId})[0]
 
     if (targetTweetObj.isRetweeted) {
         targetTweetObj.retweets--
@@ -47,6 +49,33 @@ function handleRetweetClick(tweetId) {
     targetTweetObj.isRetweeted = !targetTweetObj.isRetweeted
 
     render()
+}
+
+function handleReplyClick(tweetId) {
+    document.getElementById('reply-to-modal').style.display = 'block'
+
+    replyId = tweetId
+}
+
+function handleReplyBtnClick() {
+    const replyInput = document.getElementById('reply-input')
+    const targetTweetObj = tweetsData.filter((tweet) => {return tweet.uuid === replyId})[0]
+
+    if (replyInput.value && targetTweetObj) {
+        document.getElementById('reply-to-modal').style.display = 'none'
+    
+        targetTweetObj.replies.unshift({
+            handle: `@Scrimba`,
+            profilePic: `images/scrimbalogo.png`,
+            tweetText: replyInput.value
+        })
+
+        render()
+
+        replyInput.value = ''
+
+        document.getElementById(`replies-${replyId}`).classList.toggle('hidden')
+    }    
 }
 
 function handleTweetBtn() {
@@ -113,22 +142,19 @@ function getFeedHtml() {
                         <p class="tweet-text">${tweet.tweetText}</p>
                         <div class="tweet-details">
                             <span class="tweet-detail">
-                                <i class="fa-regular fa-comment-dots"
-                                data-reply="${tweet.uuid}"
-                                ></i>
+                                <i class="fa-regular fa-comment-dots" data-replies="${tweet.uuid}"></i>
                                 ${tweet.replies.length}
                             </span>
                             <span class="tweet-detail">
-                                <i class="fa-solid fa-heart ${likeIconClass}"
-                                data-like="${tweet.uuid}"
-                                ></i>
+                                <i class="fa-solid fa-heart ${likeIconClass}" data-like="${tweet.uuid}"></i>
                                 ${tweet.likes}
                             </span>
                             <span class="tweet-detail">
-                                <i class="fa-solid fa-retweet ${retweetIconClass}"
-                                data-retweet="${tweet.uuid}"
-                                ></i>
+                                <i class="fa-solid fa-retweet ${retweetIconClass}" data-retweet="${tweet.uuid}"></i>
                                 ${tweet.retweets}
+                            </span>
+                            <span class="tweet-detail">
+                                <i class="fa-solid fa-reply" data-reply="${tweet.uuid}"></i>
                             </span>
                         </div>   
                     </div>            
